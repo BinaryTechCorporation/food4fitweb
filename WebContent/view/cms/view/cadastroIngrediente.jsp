@@ -12,6 +12,16 @@
 %>
 
 <script>
+	$(document).ready(function(){
+		$.ajax({
+            url:"../../ListarValoresNutricionais",
+            type: "POST",
+            success: function(data) {
+                $('#tabelaNutrientes').html(data);
+            }
+        });
+	});
+
     function updateCoords(im,obj){
         $('#x').val(obj.x1);
         $('#y').val(obj.y1);
@@ -91,7 +101,7 @@
 				<div class="linha">
 					<label for="informacoes" class="label_formulario">
 						Informações: </label> <br>
-					<table>
+					<%-- <table>
 						<tr>
 							<td>id</td>
 							<td>Informação</td>
@@ -112,7 +122,8 @@
 								name="vd<%= nutricional.getIdNutricional() %>"></td>
 						</tr>
 						<% }%>
-					</table>
+					</table> --%>
+					<div id="tabelaNutrientes"></div>
 				</div>
 				<div class="linha">
 					<label for="medida" class="label_formulario"> Medida: </label> <br>

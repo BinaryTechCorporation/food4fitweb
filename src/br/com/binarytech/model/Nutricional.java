@@ -7,7 +7,7 @@ public class Nutricional extends Medida{
     }
 
     private int idNutricional;
-    private String informacao;
+    private int informacao;
     private int idMedida;
     private float vd;
 	public int getIdNutricional() {
@@ -16,10 +16,10 @@ public class Nutricional extends Medida{
 	public void setIdNutricional(int idNutricional) {
 		this.idNutricional = idNutricional;
 	}
-	public String getInformacao() {
+	public int getInformacao() {
 		return informacao;
 	}
-	public void setInformacao(String informacao) {
+	public void setInformacao(int informacao) {
 		this.informacao = informacao;
 	}
 	public int getIdMedida() {

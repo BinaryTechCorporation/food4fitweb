@@ -74,6 +74,14 @@
                             }
                         });
                     });
+                    $("#todosIngredientes").click(function(){
+                        $.ajax({
+                            url:"view/todosIngredientes.jsp",
+                            success: function(data) {
+                                $('#conteudoCms').html(data);
+                            }
+                        });
+                    });
                 });
             </script>
         </head>
@@ -175,7 +183,7 @@
                         </div>
 
                         <div class="menu_itens">
-                            <a href="#"> Todos os ingredientes </a>
+                            <p id="todosIngredientes"> Todos os ingredientes </p>
                         </div>
 
                         <div class="menu_itens">

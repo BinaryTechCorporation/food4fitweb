@@ -14,7 +14,6 @@ public class Usuario extends Pessoa{
     }
 
     private int idUsuario;
-    private String email;
     private String senha;
     private Float peso;
     private Float altura;

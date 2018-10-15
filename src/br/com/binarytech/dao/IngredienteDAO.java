@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import br.com.binarytech.jdbc.BancoWEB;
 import br.com.binarytech.model.Ingrediente;
+import br.com.binarytech.model.Medida;
 import br.com.binarytech.model.Nutricional;
 
 public class IngredienteDAO {
@@ -77,7 +78,7 @@ public class IngredienteDAO {
 				// str.setInt(1, usuarioCms.getIdFuncionario());
 				str.setInt(1, id);
 				str.setInt(2, n.getIdNutricional());
-				str.setInt(3, Integer.parseInt(n.getInformacao()));
+				str.setInt(3, n.getInformacao());
 				str.setFloat(4, n.getVd());
 
 				sucesso = str.executeUpdate();
@@ -94,6 +95,20 @@ public class IngredienteDAO {
 	}
 
 	public static Boolean deletar(int idIngrediente) {
+		String sql = "DELETE FROM ingrediente WHERE idIngrediente = ?";
+
+		try {
+			PreparedStatement str = BancoWEB.abrirConexao().prepareStatement(sql);
+
+			str.setInt(1, idIngrediente);
+
+			int rs = str.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BancoWEB.fecharConexao();
 		return true;
 	}
 
@@ -105,12 +120,42 @@ public class IngredienteDAO {
 		return true;
 	}
 
-	public static Ingrediente buscar() {
+	public static Ingrediente buscar(int idIngrediente) {
 		return new Ingrediente();
 	}
 
-	public static Ingrediente listar() {
-		return new Ingrediente();
+	public static ArrayList<Ingrediente> listar() {
+		String sql = "SELECT * from ingrediente";
+		ArrayList<Ingrediente> listaIngredientes = new ArrayList<>();
+
+		try {
+			PreparedStatement str = BancoWEB.abrirConexao().prepareStatement(sql);
+
+			ResultSet rs = str.executeQuery();
+
+			while (rs.next()) {
+				
+				Ingrediente ingrediente = new Ingrediente();
+				
+				ingrediente.setEstoque(rs.getInt("estoque"));
+				ingrediente.setIdIngrediente(rs.getInt("idIngrediente"));
+				ingrediente.setIdMedida(rs.getInt("idMedida"));
+				ingrediente.setIngrediente(rs.getString("ingrediente"));
+				ingrediente.setMargemSeguranca(rs.getInt("margemSeguranca"));
+				ingrediente.setMedida(MedidaDAO.buscar(ingrediente.getIdMedida()).getMedida());
+				ingrediente.setNutrientes(NutricionalDAO.buscarPorIngrediente(ingrediente.getIdIngrediente()));
+				ingrediente.setSigla(MedidaDAO.buscar(ingrediente.getIdMedida()).getSigla());
+				
+				listaIngredientes.add(ingrediente);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BancoWEB.fecharConexao();
+		
+		return listaIngredientes;
 	}
 
 }
