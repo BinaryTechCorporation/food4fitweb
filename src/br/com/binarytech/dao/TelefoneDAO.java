@@ -39,6 +39,7 @@ public class TelefoneDAO {
 				telefone.setIdExterno(idExterno);
 				telefone.setIdTipo(idTipo);
 				telefone.setTelefone(result.getString("telefone"));
+				telefone.setIdTelefone(result.getInt("idTelefone"));
 				
 				lista.add(telefone);
 			}

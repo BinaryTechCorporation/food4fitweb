@@ -16,34 +16,38 @@ import br.com.binarytech.dao.NutricionalDAO;
 @WebServlet("/ExcluirIngrediente")
 public class ExcluirIngrediente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ExcluirIngrediente() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ExcluirIngrediente() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//Pega o ID do ingrediente
+		// Pega o ID do ingrediente
 		int idIngrediente = Integer.parseInt(request.getParameter("id"));
-		//Deleta o ingrediente
-		IngredienteDAO.deletar(idIngrediente);
-		//Deleta os valores nutricionais ligados àquele ingrediente
+		// Deleta os valores nutricionais ligados àquele ingrediente
 		NutricionalDAO.deletarPorIngrediente(idIngrediente);
+		// Deleta o ingrediente
+		IngredienteDAO.deletar(idIngrediente);
 	}
 
 }

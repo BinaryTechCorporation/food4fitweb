@@ -71,7 +71,7 @@ public class NutricionalDAO {
 				Nutricional nutriente = new Nutricional();
 				
 				nutriente.setIdNutricional(rs.getInt("idNutricional"));
-				nutriente.setInformacao(rs.getInt("quantidade"));
+				nutriente.setQuantidade(rs.getInt("quantidade"));
 				nutriente.setVd(rs.getFloat("vd"));
 				
 				listaNutrientes.add(nutriente);
@@ -106,7 +106,7 @@ public class NutricionalDAO {
 				nutricional.setIdNutricional((rs.getInt("idNutricional")));
 				nutricional.setIdMedida(rs.getInt("idMedida"));
 				nutricional.setMedida(medidaDao.buscar(nutricional.getIdMedida()).getMedida());//
-				nutricional.setInformacao(rs.getInt("informacao"));
+				nutricional.setInformacao(rs.getString("informacao"));
 				nutricional.setSigla(medidaDao.buscar(nutricional.getIdMedida()).getSigla());
 
 				listaNutricional.add(nutricional);

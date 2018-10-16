@@ -3,12 +3,8 @@
 <%@ page import="br.com.binarytech.model.Medida"%>
 <%@ page import="br.com.binarytech.model.Nutricional"%>
 <%@ page import="br.com.binarytech.dao.NutricionalDAO"%>
-<%
-	NutricionalDAO nutricionalDao = new NutricionalDAO();
-	ArrayList<Nutricional> listaNutricional = nutricionalDao.listar();
-	
-	MedidaDAO medidaDao = new MedidaDAO(); 
-	ArrayList<Medida> listaMedidas = medidaDao.listar();
+<%	
+	ArrayList<Medida> listaMedidas = MedidaDAO.listar();
 %>
 
 <script>
@@ -18,6 +14,13 @@
             type: "POST",
             success: function(data) {
                 $('#tabelaNutrientes').html(data);
+            }
+        });
+		$.ajax({
+            url:"../../ListarMedidas",
+            type: "POST",
+            success: function(data) {
+                $('#medida').html(data);
             }
         });
 	});
@@ -75,6 +78,7 @@
                 async:true,
                 success: function(dados){
                     $("#retornoScript").html(dados);
+                    alert("Ingrediente cadastrado com sucesso!");
                 }
             });
 
@@ -127,12 +131,7 @@
 				</div>
 				<div class="linha">
 					<label for="medida" class="label_formulario"> Medida: </label> <br>
-					<select name="medida">
-						<%for(Medida medida : listaMedidas){
-                                	%>
-						<option value="<%= medida.getIdMedida() %>"><%= medida.getMedida() %></option>
-						<%} %>
-
+					<select name="medida" id="medida">
 					</select>
 				</div>
 				<div class="linha">
@@ -170,11 +169,11 @@
 
 				</div>
 				<div class="linha">
-					<span class="label_formulario"> Título: </span>
+					<span class="label_formulario"> Título da foto: </span>
 					<input type="text" name="tituloImagem" id="tituloImagem" class="inputs_formulario" maxlength="75">
 				</div>
 				<div class="linha">
-					<span class="label_formulario"> Legenda: </span>
+					<span class="label_formulario"> Legenda da foto: </span>
 					<textarea name="legendaImagem" id="legendaImagem" class="inputs_formulario" maxlength="240"></textarea>
 				</div>
 			</div>

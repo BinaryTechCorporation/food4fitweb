@@ -16,6 +16,8 @@
             <link href="view/css/editor/editor.css" rel="stylesheet">
             <link href="view/css/editor/objeto.css" rel="stylesheet"> 
             <script src="view/js/cortarImagem/jquery.imgareaselect.js"></script>
+            <link href="view/css/select/select.css" rel="stylesheet">
+            <script src="view/js/select/select.js"></script>
             <script>
                 $(document).ready(function(){
                     $("#dicasSaude").click(function(){
@@ -77,6 +79,14 @@
                     $("#todosIngredientes").click(function(){
                         $.ajax({
                             url:"view/todosIngredientes.jsp",
+                            success: function(data) {
+                                $('#conteudoCms').html(data);
+                            }
+                        });
+                    });
+                    $("#casosSucesso").click(function(){
+                        $.ajax({
+                            url:"view/casosSucesso.jsp",
                             success: function(data) {
                                 $('#conteudoCms').html(data);
                             }
@@ -157,7 +167,7 @@
                             Dicas de Saúde
                         </div>
                         <div class="menu_itens">
-                            <a href="#"> Casos de Sucesso </a>
+                            <p id="casosSucesso"> Casos de Sucesso </p>
                         </div>
                         <div class="menu_itens">
                             <p id="vantagensBeneficios">Vantagens e Benefícios</p>

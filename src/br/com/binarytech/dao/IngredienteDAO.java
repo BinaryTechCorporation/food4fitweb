@@ -78,7 +78,7 @@ public class IngredienteDAO {
 				// str.setInt(1, usuarioCms.getIdFuncionario());
 				str.setInt(1, id);
 				str.setInt(2, n.getIdNutricional());
-				str.setInt(3, n.getInformacao());
+				str.setInt(3, n.getQuantidade());
 				str.setFloat(4, n.getVd());
 
 				sucesso = str.executeUpdate();
@@ -94,22 +94,24 @@ public class IngredienteDAO {
 		return sucesso;
 	}
 
-	public static Boolean deletar(int idIngrediente) {
+	public static int deletar(int idIngrediente) {
 		String sql = "DELETE FROM ingrediente WHERE idIngrediente = ?";
+		
+		int rs = 0;
 
 		try {
 			PreparedStatement str = BancoWEB.abrirConexao().prepareStatement(sql);
 
 			str.setInt(1, idIngrediente);
 
-			int rs = str.executeUpdate();
+			rs = str.executeUpdate();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		BancoWEB.fecharConexao();
-		return true;
+		return rs;
 	}
 
 	public static Boolean ativar(int idIngrediente) {
