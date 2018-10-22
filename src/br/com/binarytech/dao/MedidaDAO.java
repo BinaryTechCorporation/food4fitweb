@@ -56,6 +56,7 @@ public class MedidaDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		BancoWEB.fecharConexao();
 		return medida;
 	}
 
@@ -86,6 +87,7 @@ public class MedidaDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		BancoWEB.fecharConexao();
 		return listaMedida;
 	}
 

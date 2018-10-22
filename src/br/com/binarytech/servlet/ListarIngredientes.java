@@ -123,7 +123,19 @@ public class ListarIngredientes extends HttpServlet {
 		writer.println("alert('Ingrediente excluído com sucesso!');");
 		writer.println("}");
 		writer.println("});");
-		writer.println(" });");
+		writer.println("});");
+		
+		writer.println("$('.editarIngrediente').click(function(){" + 
+				"            	$.ajax({" + 
+				"                    url:'view/edicaoIngrediente.jsp'," + 
+				"                    type: 'POST'," + 
+				"                    data: {id : $(this).data('idIngrediente')}," + 
+				"                    success: function(retorno) {" + 
+				"                    	$('#conteudoCms').html(retorno);" + 
+				"                    }" + 
+				"                });" + 
+				"            });");
+		
 		writer.println("</script>");
 
 		// Função que devolve a tela atualizada

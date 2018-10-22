@@ -92,6 +92,14 @@
                             }
                         });
                     });
+                    $("#meuPersonalFitness").click(function(){
+                    	$.ajax({
+                            url:"view/meuPersonalFitness.jsp",
+                            success: function(data) {
+                                $('#conteudoCms').html(data);
+                            }
+                        });
+                    });
                 });
             </script>
         </head>
@@ -161,7 +169,7 @@
                     <hr class="separador">
                     <div class="menu_paginas">
                         <div class="menu_itens personal_fitness">
-                            <a href="#"> Meu Personal Fitness </a>
+                            <p id="meuPersonalFitness"> Meu Personal Fitness </p>
                         </div>
                         <div class="menu_itens" id="dicasSaude">
                             Dicas de Saúde

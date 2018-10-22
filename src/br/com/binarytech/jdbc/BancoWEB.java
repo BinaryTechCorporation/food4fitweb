@@ -8,9 +8,9 @@ public class BancoWEB {
 	
 	private static Connection CONEXAO = null;
 	private static String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static String BANCO = "jdbc:mysql://LOCALHOST:3306/food4fit?useTimezone=true&serverTimezone=UTC&useSSL=false";
-	private static String USUARIO = "root";
-	private static String SENHA = "bcd127";
+	private static String BANCO = "jdbc:mysql://binarytech.mysql.dbaas.com.br/binarytech?useTimezone=true&serverTimezone=UTC&useSSL=false";
+	private static String USUARIO = "binarytech";
+	private static String SENHA = "Binario123";
 	
 	public static Connection abrirConexao(){
 		try {

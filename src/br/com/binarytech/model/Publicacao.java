@@ -13,49 +13,14 @@ public class Publicacao {
     public Publicacao() {
     }
 
-    /**
-     * 
-     */
     private int idPublicacao;
-
-    /**
-     * 
-     */
-    private int idUsuario;
-
-    /**
-     * 
-     */
+    private int idExterno;
     private String titulo;
-
-    /**
-     * 
-     */
     private String texto;
-
-    /**
-     * 
-     */
     private int idTabela;
-
-    /**
-     * 
-     */
     private Date data;
-
-    /**
-     * 
-     */
     private int curtida;
-
-    /**
-     * 
-     */
     private int visualizacao;
-
-    /**
-     * 
-     */
     private int compartilhamento;
 
 	public int getIdPublicacao() {
@@ -66,12 +31,12 @@ public class Publicacao {
 		this.idPublicacao = idPublicacao;
 	}
 
-	public int getIdUsuario() {
-		return idUsuario;
+	public int getIdExterno() {
+		return idExterno;
 	}
 
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setIdExterno(int idUsuario) {
+		this.idExterno = idUsuario;
 	}
 
 	public String getTitulo() {

@@ -96,7 +96,7 @@ public class IngredienteDAO {
 
 	public static int deletar(int idIngrediente) {
 		String sql = "DELETE FROM ingrediente WHERE idIngrediente = ?";
-		
+
 		int rs = 0;
 
 		try {
@@ -123,7 +123,34 @@ public class IngredienteDAO {
 	}
 
 	public static Ingrediente buscar(int idIngrediente) {
-		return new Ingrediente();
+		String sql = "SELECT * FROM ingrediente WHERE idIngrediente = ?";
+
+		Ingrediente ingrediente = new Ingrediente();
+
+		try {
+			PreparedStatement str = BancoWEB.abrirConexao().prepareStatement(sql);
+
+			str.setInt(1, idIngrediente);
+
+			ResultSet rs = str.executeQuery();
+
+			while (rs.next()) {
+				ingrediente.setEstoque(rs.getInt("estoque"));
+				ingrediente.setIdIngrediente(rs.getInt("idIngrediente"));
+				ingrediente.setIdMedida(rs.getInt("idMedida"));
+				ingrediente.setIngrediente(rs.getString("ingrediente"));
+				ingrediente.setMargemSeguranca(rs.getInt("margemSeguranca"));
+				ingrediente.setMedida(MedidaDAO.buscar(ingrediente.getIdMedida()).getMedida());
+				ingrediente.setNutrientes(NutricionalDAO.buscarPorIngrediente(ingrediente.getIdIngrediente()));
+				ingrediente.setSigla(MedidaDAO.buscar(ingrediente.getIdMedida()).getSigla());
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BancoWEB.fecharConexao();
+		return ingrediente;
 	}
 
 	public static ArrayList<Ingrediente> listar() {
@@ -136,9 +163,9 @@ public class IngredienteDAO {
 			ResultSet rs = str.executeQuery();
 
 			while (rs.next()) {
-				
+
 				Ingrediente ingrediente = new Ingrediente();
-				
+
 				ingrediente.setEstoque(rs.getInt("estoque"));
 				ingrediente.setIdIngrediente(rs.getInt("idIngrediente"));
 				ingrediente.setIdMedida(rs.getInt("idMedida"));
@@ -147,7 +174,7 @@ public class IngredienteDAO {
 				ingrediente.setMedida(MedidaDAO.buscar(ingrediente.getIdMedida()).getMedida());
 				ingrediente.setNutrientes(NutricionalDAO.buscarPorIngrediente(ingrediente.getIdIngrediente()));
 				ingrediente.setSigla(MedidaDAO.buscar(ingrediente.getIdMedida()).getSigla());
-				
+
 				listaIngredientes.add(ingrediente);
 			}
 
@@ -156,7 +183,7 @@ public class IngredienteDAO {
 			e.printStackTrace();
 		}
 		BancoWEB.fecharConexao();
-		
+
 		return listaIngredientes;
 	}
 

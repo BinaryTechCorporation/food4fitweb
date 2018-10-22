@@ -10,7 +10,6 @@
                 }
             });
             $(".editarIngrediente").click(function(){
-            	alert("teste");
             	$.ajax({
                     url:"view/edicaoIngrediente.jsp",
                     type: "POST",

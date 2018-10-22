@@ -9,6 +9,7 @@ import java.util.Date;
 
 import br.com.binarytech.jdbc.BancoWEB;
 import br.com.binarytech.model.Funcionario;
+import br.com.binarytech.model.Medida;
 import br.com.binarytech.model.Telefone;
 
 public class FuncionarioDAO {
@@ -33,8 +34,32 @@ public class FuncionarioDAO {
 		return true;
 	}
 
-	public static Funcionario buscar() {
-		return new Funcionario();
+	//ATENÇÃO: MÉTODO PROVISÓRIO. Ainda não está pronto. Fiz para um uso rápido. Só busca o id da pessoa
+	public static Funcionario buscar(int idFuncionario) {
+		String sql = "SELECT * FROM funcionario where idFuncionario = ?";
+
+		Funcionario funcionario = new Funcionario();
+
+		try {
+			PreparedStatement str = BancoWEB.abrirConexao().prepareStatement(sql);
+
+			str.setInt(1, idFuncionario);
+
+			ResultSet rs = str.executeQuery();
+
+			while (rs.next()) {
+				funcionario.setIdFuncionario(rs.getInt("idFuncionario"));
+				funcionario.setIdPessoa(rs.getInt("idPessoa"));
+				/*OBS.: o método setIdBeneficio não foi implementado pois o idBeneficio, conforme acordado, 
+				 * deverá deixar o banco futuramente***/
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BancoWEB.fecharConexao();
+		return funcionario;
 	}
 	
 	public static ArrayList<Funcionario> listarByCargoCms(int idCargo) {

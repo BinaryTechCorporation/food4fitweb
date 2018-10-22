@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import br.com.binarytech.jdbc.BancoWEB;
 import br.com.binarytech.model.Medida;
+import br.com.binarytech.model.Pessoa;
 import br.com.binarytech.model.Usuario;
 
 public class UsuarioDAO {
@@ -31,8 +32,44 @@ public class UsuarioDAO {
 		return true;
 	}
 
-	public static Usuario buscar() {
-		return new Usuario();
+	public static Usuario buscar(int idUsuario) {
+		String sql = "SELECT * FROM usuario where idUsuario = ?";
+
+		Usuario usuario = new Usuario();
+
+		try {
+			PreparedStatement str = BancoWEB.abrirConexao().prepareStatement(sql);
+
+			str.setInt(1, idUsuario);
+
+			ResultSet rs = str.executeQuery();
+
+			while (rs.next()) {
+				Pessoa pessoa = PessoaDAO.buscar(rs.getInt("idPessoa"));
+				
+				usuario.setIdUsuario(rs.getInt("idUsuario"));
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setPeso(rs.getFloat("peso"));
+				usuario.setAltura(rs.getFloat("altura"));
+				usuario.setFace(rs.getString("face"));
+				usuario.setDigital(rs.getString("digital"));
+				usuario.setIdPessoa(rs.getInt("idPessoa"));
+				
+				usuario.setIdPessoa(pessoa.getIdPessoa());
+				usuario.setNomeSocial(pessoa.getNomeSocial());
+				usuario.setEmail(pessoa.getEmail());
+				usuario.setDataNascimento(pessoa.getDataNascimento());
+				usuario.setCpf(pessoa.getCpf());
+				usuario.setRg(pessoa.getRg());
+				usuario.setSexo(pessoa.getSexo());
+				usuario.setNome(pessoa.getNome());
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return usuario;
 	}
 
 	public static ArrayList<Usuario> listar() {

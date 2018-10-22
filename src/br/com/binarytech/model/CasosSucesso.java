@@ -17,6 +17,13 @@ public class CasosSucesso {
     private int idUsuario;
     private String titulo;
     private String texto;
+    private String caminhoFoto;
+	public String getCaminhoFoto() {
+		return caminhoFoto;
+	}
+	public void setCaminhoFoto(String caminhoFoto) {
+		this.caminhoFoto = caminhoFoto;
+	}
 	public int getIdCasosSucesso() {
 		return idCasosSucesso;
 	}
